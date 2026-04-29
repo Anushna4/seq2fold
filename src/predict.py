@@ -1,18 +1,13 @@
-import joblib
-import numpy as np
-from feature_extraction import extract_features
+from prediction_utils import predict_fold
 
-# Load model
-model = joblib.load("../models/svm_model.pkl")
-scaler = joblib.load("../models/scaler.pkl")
 
 def predict_sequence(seq):
-    features = np.array(extract_features(seq)).reshape(1, -1)
-    features = scaler.transform(features)
+    return predict_fold(seq)["prediction"]
 
-    prediction = model.predict(features)
-    return prediction[0]
 
-# Test
-seq = "ACDEFGHIKLMNPQRST"
+seq = (
+    "SLFEQLGGQAAVQAVTAQFYANIQADATVATFFNGIDMPNQTNKTAAF"
+    "LCAALGGPNAWTGRNLKEVHANMGVSNAQFTTVIGHLRSALTGAGVAAALVEQTVAVAETVRGDVVTV"
+)
+
 print("Prediction:", predict_sequence(seq))

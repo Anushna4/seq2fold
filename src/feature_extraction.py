@@ -2,6 +2,7 @@ import numpy as np
 
 amino_acids = "ACDEFGHIKLMNPQRSTVWY"
 
+
 def extract_features(sequence):
     sequence = sequence.upper()
     length = len(sequence)
@@ -9,11 +10,9 @@ def extract_features(sequence):
     if length == 0:
         return np.zeros(420)
 
-    # 🔹 Amino Acid Composition (20)
     aac = [sequence.count(aa) / length for aa in amino_acids]
 
-    # 🔹 Dipeptide Composition (400)
-    dipeptides = [a+b for a in amino_acids for b in amino_acids]
+    dipeptides = [a + b for a in amino_acids for b in amino_acids]
     total = length - 1
 
     dpc = []
